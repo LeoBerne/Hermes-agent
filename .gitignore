@@ -1,0 +1,26 @@
+# Ambientes e Segredos (CRÍTICO: NUNCA VERSIONAR)
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+
+# Dados e Volumes Persistentes do Hermes
+data/*
+!data/.gitkeep
+hermes_data/
+*.db
+*.sqlite
+*.log
+logs/
+
+# Sistema Operacional e IDEs
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Arquivos temporários do AG Kit
+.temp_ag_kit/
