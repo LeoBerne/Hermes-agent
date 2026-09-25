@@ -1,0 +1,45 @@
+services:
+  # -------------------------------------------------------------
+  # Serviço Daemon: Execução contínua do Bot no Telegram
+  # Iniciar com: docker compose up -d hermes-bot
+  # -------------------------------------------------------------
+  hermes-bot:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent-telegram
+    restart: unless-stopped
+    command: ["gateway", "run"]
+    env_file:
+      - .env
+    environment:
+      - HERMES_HOME=/opt/data
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - HERMES_MODEL=${HERMES_MODEL:-anthropic/claude-3.5-sonnet}
+      - HERMES_PROVIDER=${HERMES_PROVIDER:-openrouter}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
+    volumes:
+      - ./data:/opt/data
+    network_mode: bridge
+
+  # -------------------------------------------------------------
+  # Serviço de Setup / Wizard Interativo (Opção C)
+  # Executar com: docker compose run --rm hermes-setup setup
+  # ou para gateway: docker compose run --rm hermes-setup gateway setup
+  # -------------------------------------------------------------
+  hermes-setup:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent-setup
+    profiles: ["setup"]
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    environment:
+      - HERMES_HOME=/opt/data
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - HERMES_MODEL=${HERMES_MODEL:-anthropic/claude-3.5-sonnet}
+      - HERMES_PROVIDER=${HERMES_PROVIDER:-openrouter}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
+    volumes:
+      - ./data:/opt/data
