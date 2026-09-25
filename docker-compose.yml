@@ -14,6 +14,7 @@ services:
       - HERMES_HOME=/opt/data
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - HERMES_MODEL=${HERMES_MODEL:-anthropic/claude-3.5-sonnet}
+      - HERMES_INFERENCE_MODEL=${HERMES_MODEL:-anthropic/claude-3.5-sonnet}
       - HERMES_PROVIDER=${HERMES_PROVIDER:-openrouter}
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
@@ -38,6 +39,7 @@ services:
       - HERMES_HOME=/opt/data
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - HERMES_MODEL=${HERMES_MODEL:-anthropic/claude-3.5-sonnet}
+      - HERMES_INFERENCE_MODEL=${HERMES_MODEL:-anthropic/claude-3.5-sonnet}
       - HERMES_PROVIDER=${HERMES_PROVIDER:-openrouter}
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
